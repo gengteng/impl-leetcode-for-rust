@@ -47,3 +47,41 @@ fn test_solution1() {
     assert_eq!(Solution1::longest_substring_without_repeating_characters("bbbbbbb"), 1);
     assert_eq!(Solution1::longest_substring_without_repeating_characters("pwwkew"), 3);
 }
+
+pub struct Solution2;
+
+impl LongestSubstringWithoutRepeatingCharacters for Solution2 {
+    fn longest_substring_without_repeating_characters(s: &str) -> u32 {
+        use std::collections::HashSet;
+
+        let v = s.as_bytes();
+        let len = s.len();
+        let mut max = 0;
+        let mut set = HashSet::new();
+        let mut i = 0;
+        let mut j = 0;
+
+        while i < len && j < len {
+            let b = v[j];
+            if set.contains(&b) {
+                set.remove(&v[i]);
+                i += 1;
+            } else {
+                set.insert(b);
+                j += 1;
+
+                let n = (j - i) as u32;
+                max = if n > max { n  } else { max };
+            }
+        }
+
+        max
+    }
+}
+
+#[test]
+fn test_solution2() {
+    assert_eq!(Solution2::longest_substring_without_repeating_characters("abcabcbb"), 3);
+    assert_eq!(Solution2::longest_substring_without_repeating_characters("bbbbbbb"), 1);
+    assert_eq!(Solution2::longest_substring_without_repeating_characters("pwwkew"), 3);
+}
