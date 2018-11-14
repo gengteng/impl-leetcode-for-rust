@@ -1,7 +1,13 @@
 [package]
 name = "impl-leetcode-for-rust"
 version = "0.1.0"
-authors = ["gengteng <me@gteng.org>"]
+authors = ["Geng Teng <me@gteng.org>"]
+description = "LeetCode Solutions in Rust"
+readme = "README.md"
+keywords = ["leetcode", "rust"]
+repository = "https://github.com/gengteng/impl-leetcode-for-rust.git"
+license = "MIT"
 edition = "2018"
+
 
 [dependencies]
