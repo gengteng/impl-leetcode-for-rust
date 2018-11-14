@@ -33,7 +33,7 @@ impl TwoSum for Solution1 {
 }
 
 #[test]
-fn test_two_sum_solution1() {
+fn test_solution1() {
     assert_eq!(Solution1::two_sum(&[2, 3, 7, 11], 9), Some((0, 2)));
 }
 
@@ -62,7 +62,7 @@ impl TwoSum for Solution2 {
 }
 
 #[test]
-fn test_two_sum_solution2() {
+fn test_solution2() {
     assert_eq!(Solution2::two_sum(&[2, 3, 7, 11], 9), Some((0, 2)));
 }
 
@@ -88,6 +88,6 @@ impl TwoSum for Solution3 {
 }
 
 #[test]
-fn test_two_sum_solution3() {
+fn test_solution3() {
     assert_eq!(Solution3::two_sum(&[2, 3, 7, 11], 9), Some((0, 2)));
 }
