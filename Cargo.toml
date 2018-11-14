@@ -1,0 +1,7 @@
+[package]
+name = "impl-leetcode-for-rust"
+version = "0.1.0"
+authors = ["gengteng <me@gteng.org>"]
+edition = "2018"
+
+[dependencies]
