@@ -11,13 +11,13 @@
 /// Given "pwwkew", the answer is "wke", with the length of 3. Note that the answer must be a substring, "pwke" is a subsequence and not a substring.
 ///
 pub trait LongestSubstringWithoutRepeatingCharacters {
-    fn longest_substring_without_repeating_characters(s: &str) -> u32;
+    fn length_of_longest_substring(s: &str) -> u32;
 }
 
 pub struct Solution1;
 
 impl LongestSubstringWithoutRepeatingCharacters for Solution1 {
-    fn longest_substring_without_repeating_characters(s: &str) -> u32 {
+    fn length_of_longest_substring(s: &str) -> u32 {
         let mut max: u32 = 0;
         for (i, a) in s.as_bytes().iter().enumerate() {
             let mut set = ::std::collections::HashSet::new();
@@ -43,15 +43,15 @@ impl LongestSubstringWithoutRepeatingCharacters for Solution1 {
 
 #[test]
 fn test_solution1() {
-    assert_eq!(Solution1::longest_substring_without_repeating_characters("abcabcbb"), 3);
-    assert_eq!(Solution1::longest_substring_without_repeating_characters("bbbbbbb"), 1);
-    assert_eq!(Solution1::longest_substring_without_repeating_characters("pwwkew"), 3);
+    assert_eq!(Solution1::length_of_longest_substring("abcabcbb"), 3);
+    assert_eq!(Solution1::length_of_longest_substring("bbbbbbb"), 1);
+    assert_eq!(Solution1::length_of_longest_substring("pwwkew"), 3);
 }
 
 pub struct Solution2;
 
 impl LongestSubstringWithoutRepeatingCharacters for Solution2 {
-    fn longest_substring_without_repeating_characters(s: &str) -> u32 {
+    fn length_of_longest_substring(s: &str) -> u32 {
         use std::collections::HashSet;
 
         let v = s.as_bytes();
@@ -81,7 +81,44 @@ impl LongestSubstringWithoutRepeatingCharacters for Solution2 {
 
 #[test]
 fn test_solution2() {
-    assert_eq!(Solution2::longest_substring_without_repeating_characters("abcabcbb"), 3);
-    assert_eq!(Solution2::longest_substring_without_repeating_characters("bbbbbbb"), 1);
-    assert_eq!(Solution2::longest_substring_without_repeating_characters("pwwkew"), 3);
+    assert_eq!(Solution2::length_of_longest_substring("abcabcbb"), 3);
+    assert_eq!(Solution2::length_of_longest_substring("bbbbbbb"), 1);
+    assert_eq!(Solution2::length_of_longest_substring("pwwkew"), 3);
+}
+
+pub struct Solution3;
+
+impl LongestSubstringWithoutRepeatingCharacters for Solution3 {
+    fn length_of_longest_substring(s: &str) -> u32 {
+        use std::collections::HashMap;
+        
+        let v = s.as_bytes();
+        let mut max = 0;
+        let mut map = HashMap::new();
+        let mut i =0;
+
+        for (j, c) in v.iter().enumerate() {
+            match map.get(c) {
+                Some(&n) => {
+                    i = if n > i { n } else { i };
+                },
+                None => {
+
+                }
+            }
+
+            let len = (j - i + 1) as u32;
+            max = if len > max { len } else { max };
+            map.insert(c, j + 1);
+        }
+        
+        max
+    }
+}
+
+#[test]
+fn test_solution3() {
+    assert_eq!(Solution3::length_of_longest_substring("abcabcbb"), 3);
+    assert_eq!(Solution3::length_of_longest_substring("bbbbbbb"), 1);
+    assert_eq!(Solution3::length_of_longest_substring("pwwkew"), 3);
 }
