@@ -10,3 +10,14 @@ pub mod add_two_numbers;
 /// # 3. Longest Substring Without Repeating Characters
 pub mod longest_substring_without_repeating_characters;
 
+/// # 4. Median of Two Sorted Arrays
+pub mod median_of_two_sorted_arrays;
+
+/// # 5. Longest Palindromic Substring
+pub mod longest_palindromic_substring;
+
+/// # 6. ZigZag Conversion
+pub mod zigzag_conversion;
+
+/// # 7. Reverse Integer
+pub mod reverse_integer;
