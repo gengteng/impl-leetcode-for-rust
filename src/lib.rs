@@ -21,3 +21,12 @@ pub mod zigzag_conversion;
 
 /// # 7. Reverse Integer
 pub mod reverse_integer;
+
+/// # 8. String to Integer (atoi)
+pub mod string_to_integer;
+
+/// # 9. Palindrome Number
+pub mod palindrome_number;
+
+/// # 10. Regular Expression Matching
+pub mod regular_expression_matching;
