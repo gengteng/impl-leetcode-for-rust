@@ -1,4 +1,5 @@
 #![feature(test)]
+#![feature(vec_resize_with)]
 extern crate test;
 
 /// # 1. Two Sum

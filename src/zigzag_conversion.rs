@@ -25,5 +25,41 @@
 /// Y A   H R
 /// P     I
 pub trait ZigZagConversion {
-    fn convert(s: &str, num_rows: i32) -> String;
+    fn convert(s: &str, num_rows: usize) -> String;
+}
+
+pub struct Solution1;
+
+
+impl ZigZagConversion for Solution1 {
+    fn convert(s: &str, num_rows: usize) -> String {
+        let mut v = Vec::with_capacity(num_rows);
+        v.resize_with(num_rows, String::new);
+
+        let mut r = 0;
+        let mut c = 0;
+        for b in s.as_bytes().iter()  {
+            v.get_mut(r).unwrap().push(*b as char);
+            if r == num_rows - 1 || c % (num_rows - 1) != 0 {
+                r -= 1;
+                c += 1;
+            } else {
+                r += 1;
+            }
+        }
+
+        let mut result = String::new();
+        for line in v.iter() {
+            result.push_str(line);
+        }
+
+        result
+    }
+}
+
+#[test]
+fn test_solution1() {
+    assert_eq!(Solution1::convert("LEETCODEISHIRING", 4), "LDREOEIIECIHNTSG");
+    assert_eq!(Solution1::convert("PAYPALISHIRING", 3), "PAHNAPLSIIGYIR");
+    assert_eq!(Solution1::convert("PAYPALISHIRING", 4), "PINALSIGYAHRPI");
 }
