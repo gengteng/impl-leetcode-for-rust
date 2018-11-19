@@ -38,8 +38,8 @@ impl ZigZagConversion for Solution1 {
 
         let mut r = 0;
         let mut c = 0;
-        for b in s.as_bytes().iter()  {
-            v.get_mut(r).unwrap().push(*b as char);
+        for b in s.chars()  {
+            v.get_mut(r).unwrap().push(b);
             if r == num_rows - 1 || c % (num_rows - 1) != 0 {
                 r -= 1;
                 c += 1;
