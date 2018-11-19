@@ -45,3 +45,77 @@
 pub trait StringToInteger {
     fn atoi(s: &str) -> i32;
 }
+
+pub struct Solution1;
+
+impl StringToInteger for Solution1 {
+    fn atoi(s: &str) -> i32 {
+        use std::i32::MAX;
+        use std::i32::MIN;
+
+        let chars = s.chars();
+        let mut first = false;
+        let mut negative = false;
+        let mut result = 0;
+
+        for c in chars {
+            if first {
+                let v = c as i32 - '0' as i32;
+
+                if v < 0 || v > 9 {
+                    return result;
+                }
+
+                if negative {
+                    if result > 0 {
+                        result = -result;
+                    }
+
+                    if (MIN + v) / 10 <= result {
+                        result = result * 10 - v;
+                    } else {
+                        return MIN;
+                    }
+
+                } else { // positive
+                    if (MAX - v) / 10 >= result {
+                        result = result * 10 + v;
+                    } else {
+                        return MAX;
+                    }
+                }
+            } else {
+                match c {
+                    ' ' => continue,
+                    '+' => first = true,
+                    '-' => {
+                        first = true;
+                        negative = true;
+                    },
+                    '0'..='9' => {
+                        first = true;
+                        result = c as i32 - '0' as i32;
+                    },
+                    _ => return 0
+                }
+            }
+        }
+
+        result
+    }
+}
+
+#[test]
+fn test_solution1() {
+    assert_eq!(Solution1::atoi("+1234"), 1234);
+    assert_eq!(Solution1::atoi("-1234"), -1234);
+    assert_eq!(Solution1::atoi("1234"), 1234);
+    assert_eq!(Solution1::atoi("1234 end"), 1234);
+    assert_eq!(Solution1::atoi("wtf 1234"), 0);
+    assert_eq!(Solution1::atoi("   1234 aha"), 1234);
+    assert_eq!(Solution1::atoi("   +1234 123"), 1234);
+    assert_eq!(Solution1::atoi("   -1234 dsa"), -1234);
+    assert_eq!(Solution1::atoi("   -1234 dsa"), -1234);
+    assert_eq!(Solution1::atoi("  +99999999999 max"), std::i32::MAX);
+    assert_eq!(Solution1::atoi("   -91283472332 min"), std::i32::MIN);
+}
