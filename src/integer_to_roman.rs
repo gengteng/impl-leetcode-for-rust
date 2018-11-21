@@ -19,24 +19,24 @@
 /// C can be placed before D (500) and M (1000) to make 400 and 900.
 /// Given an integer, convert it to a roman numeral. Input is guaranteed to be within the range from 1 to 3999.
 ///
-/// Example 1:
+/// # Example 1:
 ///
 /// Input: 3
 /// Output: "III"
-/// Example 2:
+/// # Example 2:
 ///
 /// Input: 4
 /// Output: "IV"
-/// Example 3:
+/// # Example 3:
 ///
 /// Input: 9
 /// Output: "IX"
-/// Example 4:
+/// # Example 4:
 ///
 /// Input: 58
 /// Output: "LVIII"
 /// Explanation: C = 100, L = 50, XXX = 30 and III = 3.
-/// Example 5:
+/// # Example 5:
 ///
 /// Input: 1994
 /// Output: "MCMXCIV"
