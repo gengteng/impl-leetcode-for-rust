@@ -24,25 +24,27 @@ pub struct Solution1;
 
 impl LongestCommonPrefix for Solution1 {
     fn longest_common_prefix(strings: &[&str]) -> String {
-        let mut result = String::new();
+        let mut len = 0;
 
         if let Some(f) = strings.iter().nth(0) {
             for (i, c) in f.chars().enumerate() {
                 for s in strings.iter().skip(1) {
                     if let Some(v) = s.chars().nth(i) {
                         if v != c {
-                            return result;
+                            return f[0..len].to_string();
                         }
                     } else {
-                        return result;
+                        return f[0..len].to_string();
                     }
                 }
 
-                result.push(c);
+                len += 1;
             }
-        }
 
-        result
+            f[0..len].to_string()
+        } else {
+            String::new()
+        }
     }
 }
 
@@ -52,4 +54,5 @@ fn test_solution1() {
     assert_eq!(Solution1::longest_common_prefix(&["dog","race_car","car"]), "");
     assert_eq!(Solution1::longest_common_prefix(&["same","same","same"]), "same");
     assert_eq!(Solution1::longest_common_prefix(&["test"]), "test");
+    assert_eq!(Solution1::longest_common_prefix(&[]), "");
 }
