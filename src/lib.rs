@@ -31,3 +31,21 @@ pub mod palindrome_number;
 
 /// # 10. Regular Expression Matching
 pub mod regular_expression_matching;
+
+/// # 11. Container With Most Water
+pub mod container_with_most_water;
+
+/// # 12. Integer to Roman
+pub mod integer_to_roman;
+
+/// # 13. Roman to Integer
+pub mod roman_to_integer;
+
+/// # 14. Longest Common Prefix
+pub mod longest_common_prefix;
+
+/// # 15. 3Sum
+pub mod three_sum;
+
+/// # 16. 3Sum Closest
+pub mod three_sum_closest;
