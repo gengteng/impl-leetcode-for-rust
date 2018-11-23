@@ -51,40 +51,75 @@ impl AddTwoNumbers for Solution1 {
     }
 }
 
-#[test]
-fn test_solution1() {
-    let mut l1 = LinkedList::<u32>::new();
-    l1.push_back(2);
-    l1.push_back(4);
-    l1.push_back(3);
+#[cfg(test)]
+mod test {
+    use super::AddTwoNumbers;
+    use test::Bencher;
 
-    let mut l2 = LinkedList::<u32>::new();
-    l2.push_back(5);
-    l2.push_back(6);
-    l2.push_back(4);
+    use super::Solution1;
+    use super::LinkedList;
+    #[test]
+    fn test_solution1() {
+        let mut l1 = LinkedList::<u32>::new();
+        l1.push_back(2);
+        l1.push_back(4);
+        l1.push_back(3);
 
-    let mut result = LinkedList::<u32>::new();
-    result.push_back(7);
-    result.push_back(0);
-    result.push_back(8);
+        let mut l2 = LinkedList::<u32>::new();
+        l2.push_back(5);
+        l2.push_back(6);
+        l2.push_back(4);
 
-    assert_eq!(Solution1::add_two_numbers(&l1, &l2), result);
+        let mut result = LinkedList::<u32>::new();
+        result.push_back(7);
+        result.push_back(0);
+        result.push_back(8);
 
-    let mut l1 = LinkedList::<u32>::new();
-    l1.push_back(9);
-    l1.push_back(9);
+        assert_eq!(Solution1::add_two_numbers(&l1, &l2), result);
 
-    let mut l2 = LinkedList::<u32>::new();
-    l2.push_back(9);
-    l2.push_back(9);
-    l2.push_back(9);
+        let mut l1 = LinkedList::<u32>::new();
+        l1.push_back(9);
+        l1.push_back(9);
 
-    let mut result = LinkedList::<u32>::new();
-    result.push_back(8);
-    result.push_back(9);
-    result.push_back(0);
-    result.push_back(1);
+        let mut l2 = LinkedList::<u32>::new();
+        l2.push_back(9);
+        l2.push_back(9);
+        l2.push_back(9);
 
-    // 99 + 999 = 1098.
-    assert_eq!(Solution1::add_two_numbers(&l1, &l2), result);
+        let mut result = LinkedList::<u32>::new();
+        result.push_back(8);
+        result.push_back(9);
+        result.push_back(0);
+        result.push_back(1);
+
+        // 99 + 999 = 1098.
+        assert_eq!(Solution1::add_two_numbers(&l1, &l2), result);
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        let mut l1 = LinkedList::<u32>::new();
+        l1.push_back(2);
+        l1.push_back(4);
+        l1.push_back(3);
+
+        let mut l2 = LinkedList::<u32>::new();
+        l2.push_back(5);
+        l2.push_back(6);
+        l2.push_back(4);
+
+        b.iter(|| Solution1::add_two_numbers(&l1, &l2));
+
+        let mut l1 = LinkedList::<u32>::new();
+        l1.push_back(9);
+        l1.push_back(9);
+
+        let mut l2 = LinkedList::<u32>::new();
+        l2.push_back(9);
+        l2.push_back(9);
+        l2.push_back(9);
+
+        // 99 + 999 = 1098.
+        b.iter(|| Solution1::add_two_numbers(&l1, &l2));
+    }
 }

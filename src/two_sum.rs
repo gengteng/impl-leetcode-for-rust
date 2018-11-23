@@ -32,16 +32,11 @@ impl TwoSum for Solution1 {
     }
 }
 
-#[test]
-fn test_solution1() {
-    assert_eq!(Solution1::two_sum(&[2, 3, 7, 11], 9), Some((0, 2)));
-}
-
 pub struct Solution2;
 
 impl TwoSum for Solution2 {
     fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
-        let mut map = ::std::collections::HashMap::new();
+        let mut map = ::std::collections::HashMap::with_capacity(nums.len());
         for (i, v) in nums.iter().enumerate() {
             map.insert(v, i);
         }
@@ -61,16 +56,11 @@ impl TwoSum for Solution2 {
     }
 }
 
-#[test]
-fn test_solution2() {
-    assert_eq!(Solution2::two_sum(&[2, 3, 7, 11], 9), Some((0, 2)));
-}
-
 pub struct Solution3;
 
 impl TwoSum for Solution3 {
     fn two_sum(nums: &[i32], target: i32) -> Option<(usize, usize)> {
-        let mut map = ::std::collections::HashMap::<i32, usize>::new();
+        let mut map = ::std::collections::HashMap::<i32, usize>::with_capacity(nums.len());
         for (i, &v) in nums.iter().enumerate() {
             let k = target - v;
             match map.get(&k) {
@@ -87,7 +77,41 @@ impl TwoSum for Solution3 {
     }
 }
 
-#[test]
-fn test_solution3() {
-    assert_eq!(Solution3::two_sum(&[2, 3, 7, 11], 9), Some((0, 2)));
+#[cfg(test)]
+mod test {
+    use super::TwoSum;
+    use test::Bencher;
+
+    use super::Solution1;
+    #[test]
+    fn test_solution1() {
+        assert_eq!(Solution1::two_sum(&[2, 3, 7, 11], 9), Some((0, 2)));
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        b.iter(|| Solution1::two_sum(&[2, 3, 7, 11], 9));
+    }
+
+    use super::Solution2;
+    #[test]
+    fn test_solution2() {
+        assert_eq!(Solution2::two_sum(&[2, 3, 7, 11], 9), Some((0, 2)));
+    }
+
+    #[bench]
+    fn bench_solution2(b: &mut Bencher) {
+        b.iter(|| Solution2::two_sum(&[2, 3, 7, 11], 9));
+    }
+
+    use super::Solution3;
+    #[test]
+    fn test_solution3() {
+        assert_eq!(Solution3::two_sum(&[2, 3, 7, 11], 9), Some((0, 2)));
+    }
+
+    #[bench]
+    fn bench_solution3(b: &mut Bencher) {
+        b.iter(|| Solution3::two_sum(&[2, 3, 7, 11], 9));
+    }
 }

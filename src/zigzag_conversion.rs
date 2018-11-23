@@ -57,9 +57,21 @@ impl ZigZagConversion for Solution1 {
     }
 }
 
-#[test]
-fn test_solution1() {
-    assert_eq!(Solution1::convert("LEETCODEISHIRING", 4), "LDREOEIIECIHNTSG");
-    assert_eq!(Solution1::convert("PAYPALISHIRING", 3), "PAHNAPLSIIGYIR");
-    assert_eq!(Solution1::convert("PAYPALISHIRING", 4), "PINALSIGYAHRPI");
+#[cfg(test)]
+mod test {
+    use super::ZigZagConversion;
+    use test::Bencher;
+
+    use super::Solution1;
+    #[test]
+    fn test_solution1() {
+        assert_eq!(Solution1::convert("LEETCODEISHIRING", 4), "LDREOEIIECIHNTSG");
+        assert_eq!(Solution1::convert("PAYPALISHIRING", 3), "PAHNAPLSIIGYIR");
+        assert_eq!(Solution1::convert("PAYPALISHIRING", 4), "PINALSIGYAHRPI");
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        b.iter(|| Solution1::convert("LEETCODEISHIRING", 4));
+    }
 }
