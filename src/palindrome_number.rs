@@ -51,16 +51,6 @@ impl PalindromeNumber for Solution1 {
     }
 }
 
-#[test]
-fn test_solution1() {
-    assert_eq!(Solution1::is_palindrome(121), true);
-    assert_eq!(Solution1::is_palindrome(-121), false);
-    assert_eq!(Solution1::is_palindrome(10), false);
-    assert_eq!(Solution1::is_palindrome(13231), true);
-    assert_eq!(Solution1::is_palindrome(127898721), true);
-    assert_eq!(Solution1::is_palindrome(1000000), false);
-}
-
 pub struct Solution2;
 
 impl PalindromeNumber for Solution2 {
@@ -80,12 +70,40 @@ impl PalindromeNumber for Solution2 {
     }
 }
 
-#[test]
-fn test_solution2() {
-    assert_eq!(Solution2::is_palindrome(121), true);
-    assert_eq!(Solution2::is_palindrome(-121), false);
-    assert_eq!(Solution2::is_palindrome(10), false);
-    assert_eq!(Solution2::is_palindrome(13231), true);
-    assert_eq!(Solution2::is_palindrome(127898721), true);
-    assert_eq!(Solution2::is_palindrome(1000000), false);
+#[cfg(test)]
+mod test {
+    use super::PalindromeNumber;
+    use test::Bencher;
+
+    use super::Solution1;
+    #[test]
+    fn test_solution1() {
+        assert_eq!(Solution1::is_palindrome(121), true);
+        assert_eq!(Solution1::is_palindrome(-121), false);
+        assert_eq!(Solution1::is_palindrome(10), false);
+        assert_eq!(Solution1::is_palindrome(13231), true);
+        assert_eq!(Solution1::is_palindrome(127898721), true);
+        assert_eq!(Solution1::is_palindrome(1000000), false);
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        b.iter(|| Solution1::is_palindrome(127898721));
+    }
+
+    use super::Solution2;
+    #[test]
+    fn test_solution2() {
+        assert_eq!(Solution2::is_palindrome(121), true);
+        assert_eq!(Solution2::is_palindrome(-121), false);
+        assert_eq!(Solution2::is_palindrome(10), false);
+        assert_eq!(Solution2::is_palindrome(13231), true);
+        assert_eq!(Solution2::is_palindrome(127898721), true);
+        assert_eq!(Solution2::is_palindrome(1000000), false);
+    }
+
+    #[bench]
+    fn bench_solution2(b: &mut Bencher) {
+        b.iter(|| Solution2::is_palindrome(127898721));
+    }
 }

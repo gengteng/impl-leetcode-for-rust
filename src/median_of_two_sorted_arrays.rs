@@ -70,9 +70,21 @@ impl MedianOfTwoSortedArrays for Solution1 {
     }
 }
 
-#[test]
-fn test_solution1() {
-    assert_eq!(Solution1::find_median_sorted_arrays(&[1, 2], &[3, 4]), 2.5);
-    assert_eq!(Solution1::find_median_sorted_arrays(&[1, 3], &[2]), 2.0);
-    assert_eq!(Solution1::find_median_sorted_arrays(&[4,6,8], &[1,3,5]), 4.5);
+#[cfg(test)]
+mod test {
+    use super::MedianOfTwoSortedArrays;
+    use test::Bencher;
+
+    use super::Solution1;
+    #[test]
+    fn test_solution1() {
+        assert_eq!(Solution1::find_median_sorted_arrays(&[1, 2], &[3, 4]), 2.5);
+        assert_eq!(Solution1::find_median_sorted_arrays(&[1, 3], &[2]), 2.0);
+        assert_eq!(Solution1::find_median_sorted_arrays(&[4,6,8], &[1,3,5]), 4.5);
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        b.iter(|| Solution1::find_median_sorted_arrays(&[4,6,8], &[1,3,5]));
+    }
 }

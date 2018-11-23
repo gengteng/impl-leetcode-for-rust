@@ -105,17 +105,29 @@ impl StringToInteger for Solution1 {
     }
 }
 
-#[test]
-fn test_solution1() {
-    assert_eq!(Solution1::atoi("+1234"), 1234);
-    assert_eq!(Solution1::atoi("-1234"), -1234);
-    assert_eq!(Solution1::atoi("1234"), 1234);
-    assert_eq!(Solution1::atoi("1234 end"), 1234);
-    assert_eq!(Solution1::atoi("wtf 1234"), 0);
-    assert_eq!(Solution1::atoi("   1234 aha"), 1234);
-    assert_eq!(Solution1::atoi("   +1234 123"), 1234);
-    assert_eq!(Solution1::atoi("   -1234 dsa"), -1234);
-    assert_eq!(Solution1::atoi("   -1234 dsa"), -1234);
-    assert_eq!(Solution1::atoi("  +99999999999 max"), std::i32::MAX);
-    assert_eq!(Solution1::atoi("   -91283472332 min"), std::i32::MIN);
+#[cfg(test)]
+mod test {
+    use super::StringToInteger;
+    use test::Bencher;
+
+    use super::Solution1;
+    #[test]
+    fn test_solution1() {
+        assert_eq!(Solution1::atoi("+1234"), 1234);
+        assert_eq!(Solution1::atoi("-1234"), -1234);
+        assert_eq!(Solution1::atoi("1234"), 1234);
+        assert_eq!(Solution1::atoi("1234 end"), 1234);
+        assert_eq!(Solution1::atoi("wtf 1234"), 0);
+        assert_eq!(Solution1::atoi("   1234 aha"), 1234);
+        assert_eq!(Solution1::atoi("   +1234 123"), 1234);
+        assert_eq!(Solution1::atoi("   -1234 dsa"), -1234);
+        assert_eq!(Solution1::atoi("   -1234 dsa"), -1234);
+        assert_eq!(Solution1::atoi("  +99999999999 max"), std::i32::MAX);
+        assert_eq!(Solution1::atoi("   -91283472332 min"), std::i32::MIN);
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        b.iter(|| Solution1::atoi("  +99999999999 max"));
+    }
 }

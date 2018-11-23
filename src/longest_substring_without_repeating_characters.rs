@@ -41,13 +41,6 @@ impl LongestSubstringWithoutRepeatingCharacters for Solution1 {
     }
 }
 
-#[test]
-fn test_solution1() {
-    assert_eq!(Solution1::length_of_longest_substring("abcabcbb"), 3);
-    assert_eq!(Solution1::length_of_longest_substring("bbbbbbb"), 1);
-    assert_eq!(Solution1::length_of_longest_substring("pwwkew"), 3);
-}
-
 pub struct Solution2;
 
 impl LongestSubstringWithoutRepeatingCharacters for Solution2 {
@@ -77,13 +70,6 @@ impl LongestSubstringWithoutRepeatingCharacters for Solution2 {
 
         max
     }
-}
-
-#[test]
-fn test_solution2() {
-    assert_eq!(Solution2::length_of_longest_substring("abcabcbb"), 3);
-    assert_eq!(Solution2::length_of_longest_substring("bbbbbbb"), 1);
-    assert_eq!(Solution2::length_of_longest_substring("pwwkew"), 3);
 }
 
 pub struct Solution3;
@@ -116,9 +102,48 @@ impl LongestSubstringWithoutRepeatingCharacters for Solution3 {
     }
 }
 
-#[test]
-fn test_solution3() {
-    assert_eq!(Solution3::length_of_longest_substring("abcabcbb"), 3);
-    assert_eq!(Solution3::length_of_longest_substring("bbbbbbb"), 1);
-    assert_eq!(Solution3::length_of_longest_substring("pwwkew"), 3);
+#[cfg(test)]
+mod test {
+    use super::LongestSubstringWithoutRepeatingCharacters;
+    use test::Bencher;
+
+    use super::Solution1;
+    #[test]
+    fn test_solution1() {
+        assert_eq!(Solution1::length_of_longest_substring("abcabcbb"), 3);
+        assert_eq!(Solution1::length_of_longest_substring("bbbbbbb"), 1);
+        assert_eq!(Solution1::length_of_longest_substring("pwwkew"), 3);
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        b.iter(|| Solution1::length_of_longest_substring("abcabcbb"));
+    }
+
+    use super::Solution2;
+    #[test]
+    fn test_solution2() {
+        assert_eq!(Solution2::length_of_longest_substring("abcabcbb"), 3);
+        assert_eq!(Solution2::length_of_longest_substring("bbbbbbb"), 1);
+        assert_eq!(Solution2::length_of_longest_substring("pwwkew"), 3);
+    }
+
+    #[bench]
+    fn bench_solution2(b: &mut Bencher) {
+        b.iter(|| Solution2::length_of_longest_substring("abcabcbb"));
+    }
+
+    use super::Solution3;
+    #[test]
+    fn test_solution3() {
+        assert_eq!(Solution3::length_of_longest_substring("abcabcbb"), 3);
+        assert_eq!(Solution3::length_of_longest_substring("bbbbbbb"), 1);
+        assert_eq!(Solution3::length_of_longest_substring("pwwkew"), 3);
+    }
+
+    #[bench]
+    fn bench_solution3(b: &mut Bencher) {
+        b.iter(|| Solution3::length_of_longest_substring("abcabcbb"));
+    }
+
 }

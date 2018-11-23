@@ -59,9 +59,20 @@ impl LongestPalindromicSubstring for Solution1 {
     }
 }
 
+#[cfg(test)]
+mod test {
+    use super::LongestPalindromicSubstring;
+    use test::Bencher;
 
-#[test]
-fn test_solution1() {
-    assert_eq!(Solution1::longest_palindrome("cbbd"), "bb");
-    assert_eq!(Solution1::longest_palindrome("abcdedcbf"), "bcdedcb");
+    use super::Solution1;
+    #[test]
+    fn test_solution1() {
+        assert_eq!(Solution1::longest_palindrome("cbbd"), "bb");
+        assert_eq!(Solution1::longest_palindrome("abcdedcbf"), "bcdedcb");
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        b.iter(|| Solution1::longest_palindrome("abcdedcbf"));
+    }
 }

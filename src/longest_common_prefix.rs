@@ -48,11 +48,23 @@ impl LongestCommonPrefix for Solution1 {
     }
 }
 
-#[test]
-fn test_solution1() {
-    assert_eq!(Solution1::longest_common_prefix(&["flower","flow","flight"]), "fl");
-    assert_eq!(Solution1::longest_common_prefix(&["dog","race_car","car"]), "");
-    assert_eq!(Solution1::longest_common_prefix(&["same","same","same"]), "same");
-    assert_eq!(Solution1::longest_common_prefix(&["test"]), "test");
-    assert_eq!(Solution1::longest_common_prefix(&[]), "");
+#[cfg(test)]
+mod test {
+    use super::LongestCommonPrefix;
+    use test::Bencher;
+
+    use super::Solution1;
+    #[test]
+    fn test_solution1() {
+        assert_eq!(Solution1::longest_common_prefix(&["flower","flow","flight"]), "fl");
+        assert_eq!(Solution1::longest_common_prefix(&["dog","race_car","car"]), "");
+        assert_eq!(Solution1::longest_common_prefix(&["same","same","same"]), "same");
+        assert_eq!(Solution1::longest_common_prefix(&["test"]), "test");
+        assert_eq!(Solution1::longest_common_prefix(&[]), "");
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        b.iter(|| Solution1::longest_common_prefix(&["flower","flow","flight"]));
+    }
 }
