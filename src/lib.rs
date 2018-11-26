@@ -1,6 +1,7 @@
 #![feature(test)]
 #![feature(vec_resize_with)]
 extern crate test;
+extern crate regex;
 
 /// # 1. Two Sum
 pub mod two_sum;
