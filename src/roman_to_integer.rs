@@ -44,3 +44,53 @@
 pub trait RomanToInteger {
     fn roman_to_int(s: &str) -> u32;
 }
+
+pub struct Solution1;
+
+impl RomanToInteger for Solution1 {
+    fn roman_to_int(s: &str) -> u32 {
+        let mut result = 0u32;
+
+        let table = [("M", 1000u32),
+            ("CM", 900), ("D", 500), ("CD", 400), ("C", 100),
+            ("XC", 90), ("L", 50), ("XL", 40), ("X", 10),
+            ("IX", 9), ("V", 5), ("IV", 4), ("I", 1)
+        ];
+
+        let mut pos = 0;
+        for (a, i) in table.iter() {
+            let mut end = a.len() + pos;
+            while end <= s.len() && *a == &s[pos..end] {
+
+                result += i;
+
+                pos += a.len();
+                end = a.len() + pos;
+            }
+        }
+
+        result
+    }
+}
+
+#[cfg(test)]
+mod test {
+    use super::RomanToInteger;
+    use test::Bencher;
+
+    use super::Solution1;
+    #[test]
+    fn test_solution1() {
+        assert_eq!(Solution1::roman_to_int("III"), 3);
+        assert_eq!(Solution1::roman_to_int("IV"), 4);
+        assert_eq!(Solution1::roman_to_int("IX"), 9);
+        assert_eq!(Solution1::roman_to_int("LVIII"), 58);
+        assert_eq!(Solution1::roman_to_int("MCMXCIV"), 1994);
+        assert_eq!(Solution1::roman_to_int("MMMCCCXXXIII"), 3333);
+    }
+
+    #[bench]
+    fn bench_solution1(b: &mut Bencher) {
+        b.iter(|| Solution1::roman_to_int("MMMCCCXXXIII"));
+    }
+}
